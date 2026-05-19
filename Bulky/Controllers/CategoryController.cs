@@ -23,18 +23,18 @@ namespace Bulky.Controllers
         }
         [HttpPost]
         public IActionResult Create(Category obj) {
-            //custom validation
+            
             if (obj.Naam == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("Naam", "De naam mag niet hetzelfde zijn als de display order");
             }
 
-            //custom validation
+            
             if(obj.Naam != null && obj.Naam.ToLower() =="test") {
                 ModelState.AddModelError("", "De naam mag niet 'Test' zijn");
             }
 
-            //model validation      
+                
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
@@ -47,7 +47,57 @@ namespace Bulky.Controllers
 
 
 
-}
+        }
+        
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
 
+            Category? obj = _db.Categories.Find(id);
+
+            if (obj == null) return NotFound();
+
+            return View(obj);
+        }
+
+       
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+           
+            if (obj.Naam == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Naam", "De naam mag niet hetzelfde zijn als de display order");
+            }
+
+            if (obj.Naam != null && obj.Naam.ToLower() == "test")
+            {
+                ModelState.AddModelError("", "De naam mag niet 'Test' zijn");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(obj); 
+        }
+
+
+        public IActionResult Remove(int id)
+        {
+            var category = _db.Categories.Find(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult Remove(Category category)
+        {
+            _db.Categories.Remove(category);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

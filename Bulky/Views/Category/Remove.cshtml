@@ -1,0 +1,32 @@
+﻿@model Category
+
+<div class="border p-3 mt-4">
+    <div class="row pb-2">
+        <h2 class="text-primary">Remove Category</h2>
+        <hr />
+    </div>
+
+    <form asp-action="Remove" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="Id" />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label>Category Name</label>
+            <input asp-for="Naam" class="form-control" readonly />
+            <span asp-validation-for="Naam" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Display Order</label>
+            <input asp-for="DisplayOrder" class="form-control" readonly />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-danger" style="width:150px">
+            DELETE
+        </button>
+    </form>
+</div>
