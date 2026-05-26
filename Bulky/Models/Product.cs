@@ -1,9 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bulky.Models
 {
     public class Product
     {
+
+
+        public int  CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+
+        public Category Category { get; set; }
         [Key]
         public int Id { get; set; }
         [Required]
