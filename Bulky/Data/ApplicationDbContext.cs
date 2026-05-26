@@ -94,7 +94,7 @@ namespace Bulky.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "FOT000000001",
                     ListPrice = 25,
-                    Price = 23,
+                    Price = 23,               
                     Price50 = 22,
                     Price100 = 20
                 }

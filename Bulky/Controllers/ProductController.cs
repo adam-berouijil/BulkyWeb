@@ -82,17 +82,26 @@ namespace Bulky.Controllers
         }
         
         
+        
         [HttpPost]
         public IActionResult Create(Product obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Products.Add(obj);
-                _db.SaveChanges();
-                TempData["gelukt"] = "Product created successfully";
-                return RedirectToAction("Index", "Product");
+                if (ModelState.IsValid)
+                {
+                    _db.Products.Add(obj);
+                    _db.SaveChanges();
+                    TempData["gelukt"] = "Product created successfully";
+                    return RedirectToAction("Index", "Product");
+                }
+                return View(obj);
             }
-            return View(obj); // ← obj meegeven!
+            catch (Exception ex)
+            {
+                // Zet hier een breakpoint
+                return Content(ex.Message + " --- " + ex.InnerException?.Message);
+            }
         }
 
     }
