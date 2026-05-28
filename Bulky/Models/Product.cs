@@ -43,5 +43,7 @@ namespace Bulky.Models
 
         public double Price100 { get; set; }
 
+        public string ImageUrl { get; set; }    
+
     }
 }
